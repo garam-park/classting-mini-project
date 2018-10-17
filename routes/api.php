@@ -13,25 +13,29 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('schools')->group(function(){
-   
-    Route::post('/', 'SchoolController@create');
-    Route::post('/{id}/subscribe', 'SchoolController@subscribe');
-    // Route::post('/{id}/subscriptions', 'SchoolController@subscribe');
+Route::post('/auth','AuthenticateController@authenticate');
 
-    Route::post('/{id}/unsubscribe', 'SchoolController@unsubscribe');
+Route::middleware(['jwt.auth'])->group(function(){
+    Route::prefix('schools')->group(function(){
+   
+        Route::post('/', 'SchoolController@create');
+        Route::post('/{id}/subscribe', 'SchoolController@subscribe');
+        // Route::post('/{id}/subscriptions', 'SchoolController@subscribe');
     
-
-    Route::post('/{id}/posts', 'SchoolController@createPost');
-
+        Route::post('/{id}/unsubscribe', 'SchoolController@unsubscribe');
+        
+    
+        Route::post('/{id}/posts', 'SchoolController@createPost');
+    
+    });
+    
+    Route::prefix('subscriptions')->group(function(){
+       
+        Route::get('/', 'SubscriptionController@index');
+        // Route::delete('/{id}', 'SubscriptionController@destroy');
+    
+    });
+    
+    Route::get('posts','PostController@index');
+        
 });
-
-Route::prefix('subscriptions')->group(function(){
-   
-    Route::get('/', 'SubscriptionController@index');
-    // Route::delete('/{id}', 'SubscriptionController@destroy');
-
-});
-
-Route::get('posts','PostController@index');
-

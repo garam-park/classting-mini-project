@@ -44,31 +44,33 @@ class User extends Authenticatable
      * @OA\Property(
      *     description="Name",
      *     title="Name",
+     *     property="name"
      * )
      *
      * @var string
      */
-    public $name;
     
     /**
      * @OA\Property(
      *     description="Email",
      *     title="Email",
+     * property="email"
      * )
      *
      * @var string
      */
-    public $email;
+
 
     /**
      * @OA\Property(
      *     description="Password",
      *     title="Password",
+     * property="password"
      * )
      *
      * @var string
      */
-    public $password;
+
 
     
 }

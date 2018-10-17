@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class User
+ * Class Subscription
  *
  * @package App\Models
  *
@@ -29,21 +29,23 @@ class Subscription extends Model
      *     format="int64",
      *     description="school_id",
      *     title="school_id",
+     *     property="school_id"
      * )
      *
      * @var integer
      */
-    public $school_id;
+    
 
     /**
      * @OA\Property(
      *     format="int64",
      *     description="user_id",
      *     title="user_id",
+     *     property="user_id"
      * )
      *
      * @var integer
      */
-    public $user_id;
+    
 
 }
