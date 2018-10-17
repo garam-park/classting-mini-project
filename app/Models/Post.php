@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class User
+ * Class Post
  *
  * @package App\Models
  *
@@ -27,29 +27,29 @@ class Post extends Model
      *     format="int64",
      *     description="ID",
      *     title="ID",
+     *     property="id"
      * )
      *
      * @var integer
      */
-    public $id;
 
     /**
      * @OA\Property(
      *     description="Title",
      *     title="Title",
+     *     property="title"
      * )
      *
      * @var string
      */
-    public $title;
 
     /**
      * @OA\Property(
      *     description="Content",
      *     title="Content",
+     *     property="content"
      * )
      *
      * @var string
      */
-    public $content;
 }
