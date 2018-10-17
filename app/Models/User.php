@@ -6,6 +6,18 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ *
+ * @package App\Models
+ *
+ * @author  Garam Park <garam-park@naver.com>
+ *
+ * @OA\Schema(
+ *     title="User model",
+ *     description="User model",
+ * )
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,4 +39,36 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @OA\Property(
+     *     description="Name",
+     *     title="Name",
+     * )
+     *
+     * @var string
+     */
+    public $name;
+    
+    /**
+     * @OA\Property(
+     *     description="Email",
+     *     title="Email",
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @OA\Property(
+     *     description="Password",
+     *     title="Password",
+     * )
+     *
+     * @var string
+     */
+    public $password;
+
+    
 }
