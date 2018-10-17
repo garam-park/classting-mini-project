@@ -13,6 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('schools')->group(function(){
+   
+    Route::post('/', 'SchoolController@create');
+    Route::post('/{id}/subscribe', 'SchoolController@subscribe');
+    // Route::post('/{id}/subscriptions', 'SchoolController@subscribe');
+
+    Route::post('/{id}/unsubscribe', 'SchoolController@unsubscribe');
+    
+
+    Route::post('/{id}/posts', 'SchoolController@createPost');
+
 });
+
+Route::prefix('subscriptions')->group(function(){
+   
+    Route::get('/', 'SubscriptionController@index');
+    // Route::delete('/{id}', 'SubscriptionController@destroy');
+
+});
+
+Route::get('posts','PostController@index');
+
