@@ -13,8 +13,21 @@ class CreateSchoolUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('school_user', function (Blueprint $table) {
             $table->increments('id');
+            
+            $table->integer('user_id',false,true);
+            $table->integer('school_id',false,true);
+            $table->enum('role',['admin','manager','user']);
+
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('school_id')
+            ->references('id')->on('schools')
+            ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +39,6 @@ class CreateSchoolUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('school_user');
     }
 }
