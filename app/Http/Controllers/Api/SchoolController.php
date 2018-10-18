@@ -66,7 +66,7 @@ class SchoolController extends Controller
         if($school = School::find($id)){    
             
             // 5만명까지만 구독할 수 있음.
-            if($school->subscriptions()->count() > 50000){
+            if($school->subscriptions()->count() >= config('subscribe_max',50000)){
                 
                 $id = $school->id;
                 $name = $school->name;
@@ -130,7 +130,11 @@ class SchoolController extends Controller
     {
         $user = $this->auth->user();
 
-        if($school = $user->schools()->wherePivot('role', '=', 'admin')->where('schools.id',$id)->first()){
+        if($school = $user->schools()
+            ->wherePivot('role', '=', 'admin')
+            ->where('schools.id',$id)
+            ->first())
+        {
 
             $post_dto = $request->only([
                 'title',
@@ -160,11 +164,11 @@ class SchoolController extends Controller
                 $post = Post::create($post_dto);
             }catch(\Exception $e){
                 return response([
-                    'message' => "validation failed",
+                    'message' => "server error",
                     'errors'  => [$e->getMessage()]
                 ],400);
             }
-            return $post;
+            return response($post,201);
 
         } else {
             return response([
