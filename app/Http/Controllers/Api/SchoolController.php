@@ -66,7 +66,7 @@ class SchoolController extends Controller
         if($school = School::find($id)){    
             
             // 5만명까지만 구독할 수 있음.
-            if($school->subscriptions()->count() >= config('subscribe_max',50000)){
+            if($school->subscriptions()->count() >= config('logic.subscribe_max',50000)){
                 
                 $id = $school->id;
                 $name = $school->name;

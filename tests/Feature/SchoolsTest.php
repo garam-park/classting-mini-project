@@ -133,7 +133,7 @@ class SchoolsTest extends TestCase
 
 
         //구독 5만명 500000 -> 5명
-        config(['subscribe_max' => 5]);
+        config(['logic.subscribe_max' => 5]);
             
         factory(User::class, 5)->create()
         ->each(function ($u) use ($school_id){
