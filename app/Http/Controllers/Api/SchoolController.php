@@ -53,7 +53,7 @@ class SchoolController extends Controller
             return response($school,201);
         }catch(\Exception $e){
             return response([
-                'message' => "validation failed",
+                'message' => "server error",
                 'errors'  => [$e->getMessage()]
             ],400);
         }
@@ -155,9 +155,15 @@ class SchoolController extends Controller
 
             $post_dto['user_id']   = $user->id; 
             $post_dto['school_id'] = $school->id;
-
-            $post = Post::create($post_dto);
-
+            
+            try{
+                $post = Post::create($post_dto);
+            }catch(\Exception $e){
+                return response([
+                    'message' => "validation failed",
+                    'errors'  => [$e->getMessage()]
+                ],400);
+            }
             return $post;
 
         } else {
