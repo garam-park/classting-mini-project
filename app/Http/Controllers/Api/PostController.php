@@ -27,6 +27,8 @@ class PostController extends Controller
 
         if($sort_by){
             $builder->orderBy('created_at',$direction);
+        }else{
+            $builder->orderBy('created_at',$direction);
         }
 
         if($school_id){
