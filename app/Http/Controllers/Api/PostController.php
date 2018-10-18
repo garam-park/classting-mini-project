@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $sort_by   = $request->sort_by;
-        $direction = $request->desc?'DESC':'ASC';
+        $direction = $request->direction?'ASC':'DESC';
         $school_id = $request->school_id;
 
         $user = $this->auth->user();
