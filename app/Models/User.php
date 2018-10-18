@@ -40,6 +40,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function schools()
+    {
+        return $this->belongsToMany(School::class)
+        ->withPivot('role');
+    }
+
     /**
      * @OA\Property(
      *     description="Name",

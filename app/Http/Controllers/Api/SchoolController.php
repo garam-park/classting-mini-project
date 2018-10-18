@@ -7,12 +7,18 @@ use App\Http\Controllers\Controller;
 use Validator;
 
 use App\Models\School;
+use Illuminate\Auth\AuthManager as Auth;
 
 class SchoolController extends Controller
 {
+    protected $auth;
+    
+    public function __construct(Auth $auth) {
+        $this->auth = $auth;
+    }
+
     public function create(Request $request)
     {
-
         $school_dto = $request->only([
             'name',
             'location'
@@ -34,8 +40,13 @@ class SchoolController extends Controller
         }
 
         try {
-            $school = School::create($school_dto);
-            //TODO 생성 요청 사용자가 관리자가 된다.
+            
+            $user = $this->auth->user();
+
+            $school = $user->schools()->save(
+                new School($school_dto),
+                ['role' => 'admin']
+            );
             
             return response($school,201);
         }catch(\Exception $e){
