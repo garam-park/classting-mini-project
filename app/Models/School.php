@@ -28,6 +28,11 @@ class School extends Model
         return $this->hasMany(Subscription::class)->with('user');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     /**
      * @OA\Property(
      *     format="int64",

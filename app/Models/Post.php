@@ -21,6 +21,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
+        'user_id',
+        'school_id',
     ];
     /**
      * @OA\Property(

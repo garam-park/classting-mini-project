@@ -46,6 +46,11 @@ class User extends Authenticatable
         ->withPivot('role');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function subscribed_schools()
     {
         return $this->belongsToMany(School::class,'subscriptions','user_id','school_id');

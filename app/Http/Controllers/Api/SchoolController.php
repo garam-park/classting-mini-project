@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Validator;
 
 use App\Models\School;
+use App\Models\Post;
+
 use Illuminate\Auth\AuthManager as Auth;
 
 class SchoolController extends Controller
@@ -120,6 +122,49 @@ class SchoolController extends Controller
                 'errors'  => ["id(:$id) is Not found"]
             ],404);
 
+        }
+        return $school;
+    }
+
+    public function createPost(Request $request,$id)
+    {
+        $user = $this->auth->user();
+
+        if($school = $user->schools()->wherePivot('role', '=', 'admin')->where('schools.id',$id)->first()){
+
+            $post_dto = $request->only([
+                'title',
+                'content'
+            ]);
+            
+            $validator = Validator::make($post_dto, [
+                'title'   => 'string|max:191',
+                'content' => 'required|string|max:1000',
+            ]);
+    
+            if ($validator->fails()) {
+                
+                $errors = $validator->errors()->all();
+                
+                return response([
+                    'message' => "validation failed",
+                    'errors'  => $errors
+                ],400);
+            }
+    
+
+            $post_dto['user_id']   = $user->id; 
+            $post_dto['school_id'] = $school->id;
+
+            $post = Post::create($post_dto);
+
+            return $post;
+
+        } else {
+            return response([
+                'message' => "Not Found",
+                'errors'  => ["id(:$id) is Not found"]
+            ],404);
         }
         return $school;
     }
