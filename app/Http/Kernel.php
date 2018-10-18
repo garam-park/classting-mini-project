@@ -41,6 +41,9 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'swagger' => [
+            \App\Http\Middleware\SwaggerAutoGenerate::class
+        ]
     ];
 
     /**

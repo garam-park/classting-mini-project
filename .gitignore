@@ -12,3 +12,7 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
+readme.md
+.editorconfig
+resources/views/vendor/l5-swagger/index.blade.php
+storage/api-docs/api-docs.json
