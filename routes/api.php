@@ -29,11 +29,8 @@ Route::middleware(['jwt.auth'])->group(function(){
     
     });
     
-    Route::prefix('subscriptions')->group(function(){
-       
+    Route::prefix('subscribed-schools')->group(function(){
         Route::get('/', 'SubscriptionController@index');
-        // Route::delete('/{id}', 'SubscriptionController@destroy');
-    
     });
     
     Route::get('posts','PostController@index');
