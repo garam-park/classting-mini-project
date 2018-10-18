@@ -27,6 +27,8 @@ class CreateSubscriptionsTable extends Migration
             ->references('id')->on('schools')
             ->onDelete('cascade');
 
+            $table->unique(['user_id','school_id']);
+
             $table->timestamps();
         });
     }

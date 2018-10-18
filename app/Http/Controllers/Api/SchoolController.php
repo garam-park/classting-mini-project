@@ -77,7 +77,42 @@ class SchoolController extends Controller
             
             $user = $this->auth->user();
             
-            $user->subscribed_schools()->save($school);
+            try{
+                $user->subscribed_schools()->save($school);
+            }catch(\Exception $e){
+
+                if($e->getCode() == 23000){
+                    return response([
+                        'message' => "이미 구독중입니다.",
+                        'errors'  => $e->getMessage()
+                    ],400);
+                } else {
+                    return response([
+                        'message' => "구독 중에 에러가 발생했습니다.",
+                        'errors'  => $e->getMessage()
+                    ],500);
+                }
+            }
+            
+
+        } else {
+            return response([
+                'message' => "Not Found",
+                'errors'  => ["id(:$id) is Not found"]
+            ],404);
+
+        }
+        return $school;
+    }
+
+    public function unsubscribe(Request $request,$id)
+    {
+
+        if($school = School::find($id)){    
+            
+            $user = $this->auth->user();
+            
+            $user->subscribed_schools()->detach($school->id);
 
         } else {
             return response([
