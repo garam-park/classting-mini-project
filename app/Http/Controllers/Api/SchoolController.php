@@ -57,4 +57,35 @@ class SchoolController extends Controller
         }
         
     }
+
+    public function subscribe(Request $request,$id)
+    {
+
+        if($school = School::find($id)){    
+            
+            // 5만명까지만 구독할 수 있음.
+            if($school->subscriptions()->count() > 50000){
+                
+                $id = $school->id;
+                $name = $school->name;
+                
+                return response([
+                    'message' => "인원 초과로 더 이상 $name 학교페이지를 구독할 수 없습니다. 나중에 다시 시도해주세요.",
+                    'errors'  => ["id(:$id) can't accept Subscriptions"]
+                ],416);
+            }
+            
+            $user = $this->auth->user();
+            
+            $user->subscribed_schools()->save($school);
+
+        } else {
+            return response([
+                'message' => "Not Found",
+                'errors'  => ["id(:$id) is Not found"]
+            ],404);
+
+        }
+        return $school;
+    }
 }

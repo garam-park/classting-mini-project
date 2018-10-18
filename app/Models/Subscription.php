@@ -23,6 +23,10 @@ class Subscription extends Model
         'school_id',
     ];
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
     /**
      * @OA\Property(

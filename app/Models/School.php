@@ -22,6 +22,12 @@ class School extends Model
         'name',
         'location',
     ];
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class)->with('user');
+    }
+
     /**
      * @OA\Property(
      *     format="int64",
