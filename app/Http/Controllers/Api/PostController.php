@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $sort_by   = $request->sort_by;
-        $direction = $request->direction?'ASC':'DESC';
+        $asc       = $request->asc?'ASC':'DESC';
         $school_id = $request->school_id;
 
         $user = $this->auth->user();
@@ -26,9 +26,9 @@ class PostController extends Controller
         $builder = $user->posts();
 
         if($sort_by){
-            $builder->orderBy('created_at',$direction);
+            $builder->orderBy('created_at',$asc);
         }else{
-            $builder->orderBy('created_at',$direction);
+            $builder->orderBy('created_at',$asc);
         }
 
         if($school_id){
