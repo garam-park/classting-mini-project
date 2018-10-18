@@ -24,6 +24,16 @@ class Post extends Model
         'user_id',
         'school_id',
     ];
+
+    protected $with = [
+        'author'
+    ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
+
     /**
      * @OA\Property(
      *     format="int64",
