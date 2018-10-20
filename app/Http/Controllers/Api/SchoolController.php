@@ -104,6 +104,52 @@ class SchoolController extends Controller
         
     }
 
+    /**
+     * 
+     * @OA\Post(
+     *     path="/api/schools/{school_id}/subscribe",
+     *     tags={"학교 페이지"},
+     *     summary="해당 학교를 구독한다",
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Parameter(
+     *          name="school_id",
+     *          in="path",
+     *          required=true,
+     *          example=1,
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="구독 성공",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/School"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="이미 구독 에러",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not Found Error",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=416,
+     *         description="구독 인원 초과",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     )
+     * )
+     */
     public function subscribe(Request $request,$id)
     {
 
