@@ -5,9 +5,15 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Post;
+use App\Models\Subscription;
+
+use Faker\Generator as Faker;
 
 class DevDatabaseSeeder extends Seeder
 {
+    public function __construct(Faker $faker) {
+        $this->faker = $faker;
+    }
     /**
      * Seed the application's database.
      *
@@ -25,8 +31,10 @@ class DevDatabaseSeeder extends Seeder
             'password' => bcrypt("password"),
         ]);
 
+        print("insert start\n");
         \DB::unprepared(\File::get(base_path().'/database/seeds/sqls/users.sql'));
-        $this->call(DevUsersTableSeeder::class);
+        print("inserted\n");
+        $users = User::where('id','!=',$admin->id)->get();
         
         $school_ids = $schools->pluck('id');
         $school_ids_with_admin_role = collect();
@@ -43,15 +51,36 @@ class DevDatabaseSeeder extends Seeder
         
         // 모두 구독하는 학교
         $school = $schools->pop();
-        $school->subscribing_users()->attach($users->pluck('id'));
+        print("subscribing\n");
+        $subscriptions = collect();
+        $school_id = $school->id;
+        
+        for ($i=2; $i <= 50000; $i++) { 
+            $subscriptions->push([
+                'user_id'=>$i,
+                'school_id'=>$school_id
+            ]);
+        };
+        
+        $chunks = $subscriptions->chunk(1000);
+        
+        foreach ($chunks as $key => $chunk) {
+            Subscription::insert($chunk->toArray());
+        }
+        
+        print("subscribed\n");
         
         //나머진 10명씩
         foreach ($schools as $key => $school) {
-            //기본 포스트 -> 학교 별로 10개
-            $post = factory(Post::class,10)->create([
-                'user_id'=>$admin->id,
-                'school_id'=>$school->id,
-            ]);
+            //기본 포스트 -> 학교 별로 10개0
+            for($i = 0 ; $i <=10; $i++){
+                $post = Post::create([
+                    'title' => $this->faker->title,
+                    'content' => $this->faker->text($maxNbChars = 1000),
+                    'user_id'=>$admin->id,
+                    'school_id'=>$school->id,
+                ]);
+            }
 
             $school->subscribing_users()->attach($users->random(10)->pluck('id'));
         }        
