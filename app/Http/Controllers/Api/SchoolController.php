@@ -197,6 +197,37 @@ class SchoolController extends Controller
         return $school;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/schools/{school_id}/unsubscribe",
+     *     tags={"학교 페이지"},
+     *     summary="해당 학교를 구독해지 한다",
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\Parameter(
+     *          name="school_id",
+     *          in="path",
+     *          required=true,
+     *          example=1,
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="구독해지 성공",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/School"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not Found Error",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     )
+     * )
+     */
     public function unsubscribe(Request $request,$id)
     {
 
