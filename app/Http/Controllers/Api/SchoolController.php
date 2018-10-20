@@ -247,6 +247,61 @@ class SchoolController extends Controller
         return $school;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/schools/{school_id}/posts",
+     *     tags={"학교 페이지"},
+     *     summary="해당 학교에 게시물(포스트)를 작성한다",
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"content"},
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="content",
+     *                     type="string",
+     *                 ),
+     *                 example={"title": "안녕하세요.", "content": "첫 번째 포스트입니다"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *          name="school_id",
+     *          in="path",
+     *          required=true,
+     *          example=1,
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="게시 성공",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/Post"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="validation 에러",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not Found Error",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     ),
+     * )
+     */
     public function createPost(Request $request,$id)
     {
         $user = $this->auth->user();
@@ -277,7 +332,6 @@ class SchoolController extends Controller
                 ],400);
             }
     
-
             $post_dto['user_id']   = $user->id; 
             $post_dto['school_id'] = $school->id;
             
@@ -289,6 +343,10 @@ class SchoolController extends Controller
                     'errors'  => [$e->getMessage()]
                 ],500);
             }
+            
+            $post->author;
+            $post->school;
+            
             return response($post,201);
 
         } else {
@@ -297,6 +355,6 @@ class SchoolController extends Controller
                 'errors'  => ["id(:$id) is Not found"]
             ],404);
         }
-        return $school;
+        
     }
 }
