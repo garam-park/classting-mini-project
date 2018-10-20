@@ -55,7 +55,7 @@ class SchoolController extends Controller
             return response([
                 'message' => "server error",
                 'errors'  => [$e->getMessage()]
-            ],400);
+            ],500);
         }
         
     }
@@ -86,12 +86,12 @@ class SchoolController extends Controller
                 if($e->getCode() == 23000){
                     return response([
                         'message' => "이미 구독중입니다.",
-                        'errors'  => $e->getMessage()
+                        'errors'  => [$e->getMessage()]
                     ],400);
                 } else {
                     return response([
                         'message' => "구독 중에 에러가 발생했습니다.",
-                        'errors'  => $e->getMessage()
+                        'errors'  => [$e->getMessage()]
                     ],500);
                 }
             }
@@ -166,7 +166,7 @@ class SchoolController extends Controller
                 return response([
                     'message' => "server error",
                     'errors'  => [$e->getMessage()]
-                ],400);
+                ],500);
             }
             return response($post,201);
 
