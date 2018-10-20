@@ -45,9 +45,9 @@ class PostsTest extends TestCase
             
             foreach ($school_ids as $_key => $school_id) {
                 if($_key==$key)
-                    $response->assertSee('"school_id":"'.$school_id.'"');
+                    $response->assertSee('"school":{"id":'.$school_id);
                 else 
-                    $response->assertDontSee('"school_id":"'.$school_id.'"');
+                    $response->assertDontSee('"school":{"id":'.$school_id);
             }
 
             $response->assertStatus(200)

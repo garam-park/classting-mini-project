@@ -72,8 +72,6 @@ class SchoolsTest extends TestCase
         ->assertJsonFragment([
             'title' =>  $post->title,
             'content' => $post->content,
-            'user_id' => $user->id,
-            'school_id' => $school->id,
         ]);
 
         //
