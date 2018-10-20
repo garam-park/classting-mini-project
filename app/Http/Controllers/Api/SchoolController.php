@@ -18,7 +18,51 @@ class SchoolController extends Controller
     public function __construct(Auth $auth) {
         $this->auth = $auth;
     }
-
+    
+    /**
+     * 
+     * @OA\Post(
+     *     path="/api/schools",
+     *     tags={"학교 페이지"},
+     *     summary="학교 페이지 생성",
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *     @OA\RequestBody(
+     *         description="학교이름, 위치를 넣는다",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"name","location"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="location",
+     *                     type="string"
+     *                 ),
+     *                 example={"name": "온누리 중학교", "location": "어디에나"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="생성 성공",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/School"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="validation 에러",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/ApiError"
+     *         )
+     *     )
+     * )
+     */
     public function create(Request $request)
     {
         $school_dto = $request->only([
