@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @OA\Schema(
  *     title="User model",
  *     description="User model",
+ *     required={"name","email"}
  * )
  */
 class User extends Authenticatable
@@ -37,7 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','created_at','updated_at','email_verified_at'
     ];
 
     public function schools()
@@ -58,9 +59,21 @@ class User extends Authenticatable
 
     /**
      * @OA\Property(
+     *     description="Id",
+     *     title="Id",
+     *     property="id",
+     *     example=1
+     * )
+     *
+     * @var integer
+     */
+
+     /**
+     * @OA\Property(
      *     description="Name",
      *     title="Name",
-     *     property="name"
+     *     property="name",
+     *     example="garam"
      * )
      *
      * @var string
@@ -70,23 +83,11 @@ class User extends Authenticatable
      * @OA\Property(
      *     description="Email",
      *     title="Email",
-     * property="email"
+     *     property="email",
+     *     example="garam-park@naver.com"
      * )
      *
      * @var string
      */
-
-
-    /**
-     * @OA\Property(
-     *     description="Password",
-     *     title="Password",
-     * property="password"
-     * )
-     *
-     * @var string
-     */
-
-
-    
+   
 }

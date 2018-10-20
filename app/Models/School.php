@@ -23,6 +23,8 @@ class School extends Model
         'location',
     ];
 
+    protected $hidden = ['created_at','updated_at'];
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class)->with('user');
@@ -38,7 +40,8 @@ class School extends Model
      *     format="int64",
      *     description="ID",
      *     title="ID",
-     *     property="id"
+     *     property="id",
+     *     example=1
      * )
      *
      * @var integer
@@ -48,7 +51,8 @@ class School extends Model
      * @OA\Property(
      *     description="Name",
      *     title="Name",
-     *     property="name"
+     *     property="name",
+     *     example="온누리 중학교"
      * )
      *
      * @var string
@@ -58,7 +62,8 @@ class School extends Model
      * @OA\Property(
      *     description="Location",
      *     title="Location",
-     *     property="location"
+     *     property="location",
+     *     example="어디에나"
      * )
      *
      * @var string

@@ -26,12 +26,20 @@ class Post extends Model
     ];
 
     protected $with = [
-        'author'
+        'author',
+        'school'
     ];
 
+    protected $hidden = ['school_id','user_id'];
+    
     public function author()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class,'school_id');
     }
 
     /**
@@ -39,7 +47,8 @@ class Post extends Model
      *     format="int64",
      *     description="ID",
      *     title="ID",
-     *     property="id"
+     *     property="id",
+     *     example=1
      * )
      *
      * @var integer
@@ -63,5 +72,47 @@ class Post extends Model
      * )
      *
      * @var string
+     */
+
+     /**
+     * @OA\Property(
+     *     description="Created At",
+     *     title="Created At",
+     *     property="created_at",
+     *     example="2018-08-16 04:18:01"
+     * )
+     *
+     * @var string
+     */
+
+     /**
+     * @OA\Property(
+     *     description="Updated At",
+     *     title="Updated At",
+     *     property="updated_at",
+     *     example="2018-08-16 04:18:01"
+     * )
+     *
+     * @var string
+     */
+
+     
+
+     /**
+     * @OA\Property(
+     *     description="Author",
+     *     title="Author",
+     *     property="author",
+     *     ref="#/components/schemas/User"
+     * )
+     */
+
+     /**
+     * @OA\Property(
+     *     description="School",
+     *     title="School",
+     *     property="school",
+     *     ref="#/components/schemas/School"
+     * )
      */
 }
