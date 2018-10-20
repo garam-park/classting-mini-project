@@ -30,6 +30,11 @@ class School extends Model
         return $this->hasMany(Subscription::class)->with('user');
     }
 
+    public function subscribing_users()
+    {
+        return $this->belongsToMany(User::class,'subscriptions','school_id','user_id');
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
