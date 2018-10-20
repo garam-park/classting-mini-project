@@ -9,6 +9,56 @@ use App\Http\Controllers\Controller;
 
 class AuthenticateController extends Controller
 {
+    /**
+     * 
+     * @OA\Post(
+     *     path="/api/auth",
+     *     tags={"인증"},
+     *     summary="jwt 인증",
+     *     description="<b>email</b>과 <b>password</b>를 통해서 jwt를 얻는다",
+     *     @OA\RequestBody(
+     *         description="email/password를 넣는다",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"email","password"},
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 example={"email": "garam-park@naver.com", "password": "password"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="authorized",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="jwt",
+     *                 type="string"
+     *             ),
+     *             example={"jwt": "token sting"}
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *             example={"error": "invalid_credentials"},
+     *             @OA\Property(
+     *                 property="error",
+     *                 type="string"
+     *             ),
+     *         )
+     *     )
+     * )
+     */
     public function authenticate(Request $request)
     {
         // grab credentials from the request
