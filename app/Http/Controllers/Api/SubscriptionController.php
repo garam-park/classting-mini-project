@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/subscribed-schools",
+     *      path="/subscribed-schools",
      *      operationId="getSubscribedSchoolsList",
      *      summary="구독한 학교 페이지 리스트를 리턴",
      *      tags={"구독"},
@@ -41,7 +41,7 @@ class SubscriptionController extends Controller
      *              @OA\Property(
      *                  property="first_page_url",
      *                  type="string",
-     *                  example="http://127.0.0.1:8000/api/posts?page=1"
+     *                  example="http://127.0.0.1:8000/posts?page=1"
      *              ),
      *              @OA\Property(
      *                  property="from",
@@ -51,7 +51,7 @@ class SubscriptionController extends Controller
      *              @OA\Property(
      *                  property="next_page_url",
      *                  type="string",
-     *                  example="http://127.0.0.1:8000/api/posts?page=4"
+     *                  example="http://127.0.0.1:8000/posts?page=4"
      *              ),
      *              @OA\Property(
      *                  property="path",
@@ -64,7 +64,7 @@ class SubscriptionController extends Controller
      *              ),
      *              @OA\Property(
      *                  property="prev_page_url",
-     *                  example="http://127.0.0.1:8000/api/posts?page=2"
+     *                  example="http://127.0.0.1:8000/posts?page=2"
      *              ),
      *              @OA\Property(
      *                  property="to",
@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
     {
         $user = $this->auth->user();
         $user_id = $user->id;
-
+        
         return School::whereHas('subscriptions',function($query) use ($user_id){
             $query->where('user_id',$user_id);
         })->select([

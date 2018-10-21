@@ -41,7 +41,7 @@ class PostsTest extends TestCase
 
             $response = $this->withHeaders([
                 'Authorization' => "Bearer $token",
-            ])->get('/api/posts?school_id='.$school_id);
+            ])->get('/posts?school_id='.$school_id);
             
             foreach ($school_ids as $_key => $school_id) {
                 if($_key==$key)
@@ -74,7 +74,7 @@ class PostsTest extends TestCase
         
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->get('/api/posts');
+        ])->get('/posts');
         
         $order = $posts->sortByDESC('created_at')->pluck('created_at');
 
@@ -87,7 +87,7 @@ class PostsTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->get('/api/posts?asc=1');
+        ])->get('/posts?asc=1');
         
         $order = $posts->sortBy('created_at')->pluck('created_at');
 
@@ -99,7 +99,7 @@ class PostsTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->get('/api/posts?asc=0');
+        ])->get('/posts?asc=0');
         
         $order = $posts->sortByDESC('created_at')->pluck('created_at');
 

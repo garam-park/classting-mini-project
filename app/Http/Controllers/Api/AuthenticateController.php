@@ -12,7 +12,7 @@ class AuthenticateController extends Controller
     /**
      * 
      * @OA\Post(
-     *     path="/api/auth",
+     *     path="/auth",
      *     tags={"인증"},
      *     summary="jwt 인증",
      *     description="<b>email</b>과 <b>password</b>를 통해서 jwt를 얻는다",

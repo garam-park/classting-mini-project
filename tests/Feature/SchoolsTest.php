@@ -41,7 +41,7 @@ class SchoolsTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->json('POST', '/api/schools', $school->toArray());
+        ])->json('POST', '/schools', $school->toArray());
         
         $response->assertStatus(201)
         ->assertJsonFragment([
@@ -65,7 +65,7 @@ class SchoolsTest extends TestCase
             'Authorization' => "Bearer $token",
         ])->json(
             'POST',
-            "/api/schools/$school_id/posts",
+            "/schools/$school_id/posts",
             $post->toArray());
         
         $response->assertStatus(201)
@@ -97,7 +97,7 @@ class SchoolsTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/$school_id/subscribe");
+        ])->post("/schools/$school_id/subscribe");
         
         //구독 정상 처리
         $response->assertStatus(200)
@@ -109,14 +109,14 @@ class SchoolsTest extends TestCase
         //400
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/$school_id/subscribe");
+        ])->post("/schools/$school_id/subscribe");
 
         $response->assertStatus(400);
         
         //404
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/10000/subscribe");
+        ])->post("/schools/10000/subscribe");
 
         $response->assertStatus(404);
 
@@ -124,7 +124,7 @@ class SchoolsTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/$school_id/unsubscribe");
+        ])->post("/schools/$school_id/unsubscribe");
 
         $response->assertStatus(200)
         ->assertJsonFragment([
@@ -135,7 +135,7 @@ class SchoolsTest extends TestCase
         //404
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/10000/unsubscribe");
+        ])->post("/schools/10000/unsubscribe");
 
         $response->assertStatus(404);
 
@@ -150,7 +150,7 @@ class SchoolsTest extends TestCase
         
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->post("/api/schools/$school_id/subscribe");
+        ])->post("/schools/$school_id/subscribe");
         
         $response->assertStatus(416);
     }

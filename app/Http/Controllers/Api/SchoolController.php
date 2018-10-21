@@ -22,7 +22,7 @@ class SchoolController extends Controller
     /**
      * 
      * @OA\Post(
-     *     path="/api/schools",
+     *     path="/schools",
      *     tags={"학교 페이지"},
      *     summary="학교 페이지 생성",
      *     security={
@@ -107,7 +107,7 @@ class SchoolController extends Controller
     /**
      * 
      * @OA\Post(
-     *     path="/api/schools/{school_id}/subscribe",
+     *     path="/schools/{school_id}/subscribe",
      *     tags={"학교 페이지"},
      *     summary="해당 학교를 구독한다",
      *     security={
@@ -199,7 +199,7 @@ class SchoolController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/schools/{school_id}/unsubscribe",
+     *     path="/schools/{school_id}/unsubscribe",
      *     tags={"학교 페이지"},
      *     summary="해당 학교를 구독해지 한다",
      *     security={
@@ -249,7 +249,7 @@ class SchoolController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/schools/{school_id}/posts",
+     *     path="/schools/{school_id}/posts",
      *     tags={"학교 페이지"},
      *     summary="해당 학교에 게시물(포스트)를 작성한다",
      *     security={

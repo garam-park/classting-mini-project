@@ -33,8 +33,8 @@ class SubscriptionTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token",
-        ])->get('/api/subscribed-schools');
-
+        ])->get('/subscribed-schools');
+        
         $response->assertStatus(200)
         ->assertJsonStructure([
             'current_page',

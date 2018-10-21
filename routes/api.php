@@ -29,7 +29,7 @@ Route::middleware(['jwt.auth'])->group(function(){
     
     });
     
-    Route::prefix('subscribed-schools')->group(function(){
+    Route::prefix('/subscribed-schools')->group(function(){
         Route::get('/', 'SubscriptionController@index');
     });
     
