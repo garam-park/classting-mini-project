@@ -60,7 +60,7 @@ class PostController extends Controller
      *              @OA\Property(
      *                  property="first_page_url",
      *                  type="string",
-     *                  example="http://127.0.0.1:8000/posts?page=1"
+     *                  example="https://api.classting.garam.xyz/posts?page=1"
      *              ),
      *              @OA\Property(
      *                  property="from",
@@ -70,12 +70,12 @@ class PostController extends Controller
      *              @OA\Property(
      *                  property="next_page_url",
      *                  type="string",
-     *                  example="http://127.0.0.1:8000/posts?page=4"
+     *                  example="https://api.classting.garam.xyz/posts?page=4"
      *              ),
      *              @OA\Property(
      *                  property="path",
      *                  type="string",
-     *                  example="http://127.0.0.1:8000/posts"
+     *                  example="https://api.classting.garam.xyz/posts"
      *              ),
      *              @OA\Property(
      *                  property="per_page",
@@ -84,7 +84,7 @@ class PostController extends Controller
      *              ),
      *              @OA\Property(
      *                  property="prev_page_url",
-     *                  example="http://127.0.0.1:8000/posts?page=2"
+     *                  example="https://api.classting.garam.xyz/posts?page=2"
      *              ),
      *              @OA\Property(
      *                  property="to",

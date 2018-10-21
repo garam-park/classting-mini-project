@@ -29,7 +29,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *  )
  *
  *  @OA\Server(
- *      url="http://127.0.0.1:8000/",
+ *      url="https://api.classting.garam.xyz",
  *      description="Local Server"
  *  )
  */
